@@ -20,7 +20,7 @@ function depositImp(var finance_storage: finance_storage): (list(operation) * fi
 
 function withdrawImp(var finance_storage: finance_storage): (list(operation) * finance_storage) is
   block {
-    const withdrawAmount: tez = 100mtz;  
+    const withdrawAmount: tez = 1000000mtz;  
     var operations: list(operation) := nil;
 
     if withdrawAmount > finance_storage.liquidity

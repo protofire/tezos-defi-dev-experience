@@ -34,7 +34,7 @@
                     { {} ;
                       {} ;
                       {} ;
-                      { PUSH mutez 100 ;
+                      { PUSH mutez 1000000 ;
                         { NIL operation ;
                           { { { { { DIP { DUP } ; SWAP } ;
                                   DIP { { { DIP { { DIP { DUP } ; SWAP } } ; SWAP } ; DIP { {} } } } } ;
