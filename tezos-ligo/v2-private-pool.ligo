@@ -13,7 +13,7 @@ const noOperations: list(operation) = nil;
 function depositImp(var finance_storage: finance_storage): (list(operation) * finance_storage) is
   block {
     if amount = 0mtz
-      then fail("No tez transferred!");
+      then failwith("No tez transferred!");
       else block {
         finance_storage.liquidity := finance_storage.liquidity + amount;   
 
@@ -21,7 +21,7 @@ function depositImp(var finance_storage: finance_storage): (list(operation) * fi
         const depositsMap: map(address, tez) = finance_storage.deposits;                
         const senderDeposit: option(tez) = depositsMap[sender];
         case senderDeposit of          
-          | Some(a) -> skip
+          | Some(a) -> skip //(failwith("You already have a deposit"): int)
           | None -> block {
              depositsMap[sender] := amount;
              finance_storage.deposits := depositsMap;
@@ -40,7 +40,7 @@ function withdrawImp(var finance_storage: finance_storage): (list(operation) * f
     var operations: list(operation) := nil;    
 
     if senderDeposit = 0mtz or senderDeposit > finance_storage.liquidity
-      then fail("No funds to withdraw!")
+      then failwith("No funds to withdraw!")
       else block {
         // Create the operation to transfer tez to sender
         const receiver: contract(unit) = get_contract(senderAddress);
