@@ -4,6 +4,7 @@ type entry_action is
 | Withdraw
 
 type finance_storage is record  
+  deposits: map(address, tez);
   liquidity: tez;    
 end
 
@@ -12,26 +13,49 @@ const noOperations: list(operation) = nil;
 function depositImp(var finance_storage: finance_storage): (list(operation) * finance_storage) is
   block {
     if amount = 0mtz
-      then skip //fail("No tez transferred!");
+      then fail("No tez transferred!");
       else block {
-        finance_storage.liquidity := finance_storage.liquidity + amount;       
+        finance_storage.liquidity := finance_storage.liquidity + amount;   
+
+        //setting the deposit to the sender
+        const depositsMap: map(address, tez) = finance_storage.deposits;                
+        const senderDeposit: option(tez) = depositsMap[sender];
+        case senderDeposit of          
+          | Some(a) -> skip
+          | None -> block {
+             depositsMap[sender] := amount;
+             finance_storage.deposits := depositsMap;
+          }
+        end;     
       }
   } with(noOperations, finance_storage)
 
 function withdrawImp(var finance_storage: finance_storage): (list(operation) * finance_storage) is
-  block {
-    const withdrawAmount: tez = 100mtz;  
-    var operations: list(operation) := nil;
+  block {    
+    const senderAddress: address = sender;
+    //For testing purposes, comment the line above and uncomment next line.
+    //const senderAddress: address = ("tz1MZ4GPjAA2gZxKTozJt8Cu5Gvu6WU2ikZ4" : address);
 
-    if withdrawAmount > finance_storage.liquidity
-      then skip //fail("No funds to withdraw!")
+    const senderDeposit: tez = get_force(senderAddress, finance_storage.deposits);
+    var operations: list(operation) := nil;    
+
+    if senderDeposit = 0mtz or senderDeposit > finance_storage.liquidity
+      then fail("No funds to withdraw!")
       else block {
-        const receiver: contract(unit) = get_contract(sender);
-        const payoutOperation: operation = transaction(unit, withdrawAmount, receiver);
+        // Create the operation to transfer tez to sender
+        const receiver: contract(unit) = get_contract(senderAddress);
+        const payoutOperation: operation = transaction(unit, senderDeposit, receiver);
         operations:= list 
           payoutOperation 
-        end;       
-        finance_storage.liquidity := finance_storage.liquidity - withdrawAmount;              
+        end;  
+
+        // update liquidity pool
+        finance_storage.liquidity := finance_storage.liquidity - senderDeposit;              
+
+        // update deposits for sender
+        const depositsMap: map(address, tez) = finance_storage.deposits;  
+        depositsMap[senderAddress] := 0mtz;
+        finance_storage.deposits := depositsMap;              
       }
   } with(operations, finance_storage)
 
