@@ -12,6 +12,6 @@ We have written a series of blogpost that will guide you into getting started wi
 
 * [Choosing a Language for Smart Contracts on Tezos](https://medium.com/protofire-blog/choosing-a-language-for-smart-contracts-on-tezos-125c4e50552e)
 * [Getting started with Tezos](https://medium.com/protofire-blog/getting-started-with-tezos-ebaeeadd8b5f)
-* [Part 1: Create, deploy and interact with a contract.]()
-* [Part 2: Create, deploy and interact with a contract.]()
-* [Part 3: Create, deploy and interact with a contract.]()
+* [Part 1: Create, deploy and interact with a contract]()
+* [Part 2: Create, deploy and interact with a contract]()
+* [Part 3: Create, deploy and interact with a contract]()
