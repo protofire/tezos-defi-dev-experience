@@ -4,7 +4,7 @@ type entry_action is
 | Withdraw
 
 type finance_storage is record  
-  deposits: map(address, tez);
+  deposits: big_map(address, tez);
   liquidity: tez;    
 end
 
@@ -16,7 +16,7 @@ function depositImp(var finance_storage: finance_storage): (list(operation) * fi
       then failwith("No tez transferred!");
       else block {       
         //setting the deposit to the sender
-        var depositsMap: map(address, tez) := finance_storage.deposits;                
+        var depositsMap: big_map(address, tez) := finance_storage.deposits;                
         const senderDeposit: option(tez) = depositsMap[sender];
 
         case senderDeposit of          
@@ -45,7 +45,7 @@ function withdrawImp(var finance_storage: finance_storage): (list(operation) * f
       then failwith("No tez to withdraw!");
       else block {
         // update storage
-        var depositsMap: map(address, tez) := finance_storage.deposits;                
+        var depositsMap: big_map(address, tez) := finance_storage.deposits;                
         remove senderAddress from map depositsMap;        
         
         finance_storage.deposits := depositsMap;              

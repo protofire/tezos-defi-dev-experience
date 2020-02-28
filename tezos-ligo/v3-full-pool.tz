@@ -1,6 +1,6 @@
 { parameter (or (unit %deposit) (unit %withdraw)) ;
   storage
-    (pair (map %deposits address (pair (timestamp %blockTimestamp) (mutez %tezAmount)))
+    (pair (big_map %deposits address (pair (timestamp %blockTimestamp) (mutez %tezAmount)))
           (mutez %liquidity)) ;
   code { LAMBDA
            bool
