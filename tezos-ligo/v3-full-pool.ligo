@@ -34,7 +34,7 @@ function calculateInterest(const elapsedBlocks: int): tez is
 
 function depositImp(var finance_storage: finance_storage): (list(operation) * finance_storage) is
   block {
-    if amount = 0mtz
+    if amount = 0mutez
       then failwith("No tez transferred!");
       else block {     
         const senderAddress: address = getSender(False);

@@ -11,7 +11,7 @@ const noOperations: list(operation) = nil;
 
 function depositImp(var finance_storage: finance_storage): (list(operation) * finance_storage) is
   block {
-    if amount = 0mtz
+    if amount = 0mutez
       then skip //fail("No tez transferred!");
       else block {
         finance_storage.liquidity := finance_storage.liquidity + amount;       
@@ -20,7 +20,7 @@ function depositImp(var finance_storage: finance_storage): (list(operation) * fi
 
 function withdrawImp(var finance_storage: finance_storage): (list(operation) * finance_storage) is
   block {
-    const withdrawAmount: tez = 1000000mtz;  
+    const withdrawAmount: tez = 1000000mutez;  
     var operations: list(operation) := nil;
 
     if withdrawAmount > finance_storage.liquidity

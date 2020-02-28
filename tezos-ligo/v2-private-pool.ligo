@@ -12,7 +12,7 @@ const noOperations: list(operation) = nil;
 
 function depositImp(var finance_storage: finance_storage): (list(operation) * finance_storage) is
   block {
-    if amount = 0mtz
+    if amount = 0mutez
       then failwith("No tez transferred!");
       else block {       
         //setting the deposit to the sender
@@ -40,7 +40,7 @@ function withdrawImp(var finance_storage: finance_storage): (list(operation) * f
     var operations: list(operation) := nil;    
     const senderDeposit: tez = get_force(senderAddress, finance_storage.deposits);
 
-    if senderDeposit = 0mtz or 
+    if senderDeposit = 0mutez or 
        senderDeposit > finance_storage.liquidity
       then failwith("No tez to withdraw!");
       else block {
