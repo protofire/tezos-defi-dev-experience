@@ -9,7 +9,7 @@ type deposit_info is record
 end
 
 type finance_storage is record  
-  deposits: map(address, deposit_info);
+  deposits: big_map(address, deposit_info);
   liquidity: tez;   
 end
 
@@ -34,13 +34,13 @@ function calculateInterest(const elapsedBlocks: int): tez is
 
 function depositImp(var finance_storage: finance_storage): (list(operation) * finance_storage) is
   block {
-    if amount = 0mtz
+    if amount = 0mutez
       then failwith("No tez transferred!");
       else block {     
         const senderAddress: address = getSender(False);
 
         //setting the deposit to the sender
-        var depositsMap: map(address, deposit_info) := finance_storage.deposits;    
+        var depositsMap: big_map(address, deposit_info) := finance_storage.deposits;    
         var senderDepositInfo: option(deposit_info) := depositsMap[senderAddress];            
 
         case senderDepositInfo of          
@@ -84,7 +84,7 @@ function withdrawImp(var finance_storage: finance_storage): (list(operation) * f
       then failwith("No tez to withdraw!");
       else block {
         // update storage
-        var depositsMap: map(address, deposit_info) := finance_storage.deposits;                
+        var depositsMap: big_map(address, deposit_info) := finance_storage.deposits;                
         remove senderAddress from map depositsMap;
         finance_storage.deposits := depositsMap;  
 
