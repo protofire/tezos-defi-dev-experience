@@ -1,1 +1,4 @@
 *.pp.ligo
+
+# Webstorm project configuration
+.idea

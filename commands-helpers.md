@@ -24,6 +24,12 @@ $ ligo compile-parameter contractName.ligo -s pascaligo main "Inc(-20)"
 $ ligo run-function file.ligo functionName "args"
 ```
 
+### Test entrypoint
+
+```bash
+$ ligo dry-run contractName.ligo --syntax pascaligo --amount 0 entryPoint "arg" "storage"
+```
+
 ### Copy to docker
 
 ```bash
