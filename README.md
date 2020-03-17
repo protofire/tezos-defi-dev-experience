@@ -10,8 +10,8 @@ The structure is self-descriptive:
 ## Blog posts
 We have written a series of blogpost that will guide you into getting started with tezos.
 
-* [Choosing a Language for Smart Contracts on Tezos](https://medium.com/protofire-blog/choosing-a-language-for-smart-contracts-on-tezos-125c4e50552e)
 * [Getting started with Tezos](https://medium.com/protofire-blog/getting-started-with-tezos-ebaeeadd8b5f)
-* [Part 1: Create, deploy and interact with a contract]()
-* [Part 2: Create, deploy and interact with a contract]()
-* [Part 3: Create, deploy and interact with a contract]()
+* [Choosing a Language for Smart Contracts on Tezos](https://medium.com/protofire-blog/choosing-a-language-for-smart-contracts-on-tezos-125c4e50552e)
+* [Part 1: Create, deploy and interact with a contract](https://medium.com/protofire-blog/tezos-part-1-creating-deploying-and-interacting-with-a-contract-5ee3efa819fa)
+* [Part 2: A private liquidity pool](https://medium.com/protofire-blog/tezos-part-2-a-private-liquidity-pool-dfb387ceb04a)
+* [Part 3: Applying interest in a liquidity pool contract](https://medium.com/protofire-blog/tezos-part-3-applying-interest-in-a-liquidity-pool-contract-2e709d3a2a92)
